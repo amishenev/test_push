@@ -1,0 +1,36 @@
+name: Create PDF document
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'latex/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'latex/**'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build PDF file
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: latex
+          root_file: main.tex
+          latexmk_shell_escape: true
+
+      - name: Store PDF
+        uses: actions/upload-artifact@v3
+        with:
+          name: parallel_programming
+          path: main.pdf
+
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.1.1
+        with:
+          name: parallel_programming
