@@ -34,7 +34,8 @@ jobs:
           git config --local user.name "github-actions[bot]"
           mkdir -p pdf
           cp latex/main.pdf pdf/main.pdf
-          git commit -a -m "Add changes" 
+          git add pdf/main.pdf
+          git commit -m "Add changes" 
       - name: push PDF
         uses: ad-m/github-push-action@v0.6.0
         with:
