@@ -27,4 +27,4 @@ jobs:
       - name: Store PDF
         uses: actions/upload-artifact@v3
         with:
-          path: main.pdf
+          path: latex/main.pdf
