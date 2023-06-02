@@ -35,8 +35,8 @@ jobs:
       - name: Push PDF
         uses: Andro999b/push@v1.3
         with:
-          coauthor_email: ${github.event.commits[0].author.email}
-          coauthor_name: ${github.event.commits[0].author.name}
+          coauthor_email: ${{ github.event.commits[0].author.email }}
+          coauthor_name: ${{ github.event.commits[0].author.name }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
         
