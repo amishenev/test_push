@@ -1,4 +1,4 @@
-name: Create PDF document
+name: Create PDF document and push
 
 on:
   workflow_dispatch:
@@ -6,11 +6,7 @@ on:
     branches: [ "main" ]
     paths:
       - 'latex/**'
-  pull_request:
-    branches: [ "main" ]
-    paths:
-      - 'latex/**'
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,19 +25,14 @@ jobs:
         with:
           path: latex/main.pdf
 
-  push_pdf:
-    runs-on: ubuntu-latest
-    needs: build
-    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') ||  github.event_name == 'workflow_dispatch' }}
-    steps:
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           mkdir -p pdf && cp latex/main.pdf pdf/main.pdf
           git add pdf/main.pdf
-          git commit -m "Add pdf file" 
-          
+          git commit -m "Add pdf file"
+
       - name: Push PDF
         uses: ad-m/github-push-action@v0.6.0
         with:
