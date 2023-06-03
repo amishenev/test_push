@@ -12,6 +12,7 @@
 \DeclareOption{onecolumn}{\OptionNotUsed}
 \DeclareOption{green}{\renewcommand{\headlinecolor}{\color{green}}}
 \DeclareOption{red}{\renewcommand{\headlinecolor}{\color{slcolor}}}
+\DeclareOption{blue}{\renewcommand{\headlinecolor}{\color{blue}}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass[twocolumn]{article}
