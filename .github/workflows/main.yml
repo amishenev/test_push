@@ -28,15 +28,18 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: latex/main.pdf
+
       - name: Commit files
         run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           mkdir -p pdf && cp latex/main.pdf pdf/main.pdf
           git add pdf/main.pdf
+          git commit -m "Add pdf file" 
+          
       - name: Push PDF
-        uses: Andro999b/push@v1.3
+        uses: ad-m/github-push-action@v0.6.0
         with:
-          coauthor_email: ${{ github.event.commits[0].author.email }}
-          coauthor_name: ${{ github.event.commits[0].author.name }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
         
