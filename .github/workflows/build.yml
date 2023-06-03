@@ -18,3 +18,10 @@ jobs:
           working_directory: latex
           root_file: main.tex
           latexmk_shell_escape: true
+
+      - name: Add pdf to comment
+        uses: gavv/pull-request-artifacts@v1.0.0
+        with:
+          commit: ${{ github.event.pull_request.head.sha }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: latex/main.pdf
